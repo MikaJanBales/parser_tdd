@@ -57,37 +57,35 @@ class Coordinates(BaseModel):
     longitude: Address
 
 
-class Experience(BaseModel):
-    id = 'noMatter'
-
-
-a = 'from'
+# class Experience(BaseModel):
+    # id: str = Field(default='noMatter')
 
 
 class Salary(BaseModel):
-    a: int
+    # from: int
     to: int
 
 
-class Schedule(BaseModel):
-    id = 'fullDay'
+# class Schedule(BaseModel):
+#     id: str = Field(default='fullDay')
+#     id_: str = Field(default='_')
 
 
 class Resume(BaseModel):
     address: Address
-    allow_messages = True
-    billing_type = 'packageOrSingle'
-    business_area = 1
-    contacts: Contacts
-    # coordinates: Coordinates
-    description: str
-    # experience: Experience
-    html_tags = True
-    image_url = 'https://img.hhcdn.ru/employer-logo/3410666.jpeg'
-    name: str
-    # salary:
-    # salary_range: Salary
-    # schedule: Schedule
+    # allow_messages: bool = Field(default=True)
+    # billing_type: str = Field(default='packageOrSingle')
+    # business_area: int = Field(default=1)
+    # contacts: Contacts
+    # # # coordinates: Coordinates
+    # description: str
+    # experience = dict
+    # html_tags = True
+    # image_url: HttpUrl = Field(default='https://img.hhcdn.ru/employer-logo/3410666.jpeg')
+    # name: str
+    # salary: Salary
+    # salary_range: Salary = Field(alias='salary', title='salary_range')
+    # schedule = dict
 
 
 try:
