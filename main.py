@@ -81,7 +81,7 @@ class Resume(BaseModel):
     contacts: Contacts
     # coordinates: Coordinates
     description: str
-    experience: Experience
+    # experience: Experience
     html_tags = True
     image_url = 'https://img.hhcdn.ru/employer-logo/3410666.jpeg'
     name: str
