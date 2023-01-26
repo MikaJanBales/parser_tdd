@@ -36,6 +36,8 @@ data = '''
 class Address(BaseModel):
     # address: str = Field(alias='value')
     value: str
+    lat: float
+    lng: float
 
 
 class Phone(BaseModel):
@@ -46,13 +48,13 @@ class Phone(BaseModel):
 
 class Contacts(BaseModel):
     email: EmailStr
-    # name: str = Field(alias='fullName')
+    name: str = Field(alias='fullName')
     # phone: Phone
 
 
 class Coordinates(BaseModel):
-    latitude: float
-    longitude: float
+    latitude: Address
+    longitude: Address
 
 
 class Experience(BaseModel):
@@ -72,14 +74,14 @@ class Schedule(BaseModel):
 
 
 class Resume(BaseModel):
-    # address: Address
+    address: Address
     allow_messages = True
     billing_type = 'packageOrSingle'
     business_area = 1
     contacts: Contacts
     # coordinates: Coordinates
-    # description: str
-    # experience: Experience
+    description: str
+    experience: Experience
     html_tags = True
     image_url = 'https://img.hhcdn.ru/employer-logo/3410666.jpeg'
     name: str
