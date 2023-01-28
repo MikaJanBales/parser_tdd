@@ -33,72 +33,68 @@ data = '''
 
 class Contacts(BaseModel):
     email: EmailStr
-    name: str = Field(alias='fullName')
+    name: str = Field(alias="fullName")
     phone: str
 
-    @validator('phone')
+    @validator("phone")
     def phone_number(cls, v):
         d = {
-            'city': v[1:4],
-            'country': v[0],
-            'number': v[4:7] + '-' + v[7:9] + '-' + v[9:]
+            "city": v[1:4],
+            "country": v[0],
+            "number": v[4:7] + '-' + v[7:9] + '-' + v[9:]
         }
         return d
 
 
 class Resume(BaseModel):
     address: dict
-
-    @validator('address')
-    def address_value(cls, v):
-        v = v['value']
-        return v
-
     allow_messages: bool = Field(default=True)
-    billing_type: str = Field(default='packageOrSingle')
+    billing_type: str = Field(default="packageOrSingle")
     business_area: int = Field(default=1)
     contacts: Contacts
-    coordinates: dict = Field(alias='address')
-
-    @validator('coordinates')
-    def coordinate(cls, v):
-        d = {
-            'latitude': v['lat'],
-            'longitud': v['lng']
-        }
-        return d
-
+    coordinates: dict = Field(alias="address")
     description: str
-    experience: dict = Field(default={'id': 'noMatter'})
+    experience: dict = Field(default={"id": "noMatter"})
     html_tags: bool = Field(default=True)
     image_url: HttpUrl = Field(default='https://img.hhcdn.ru/employer-logo/3410666.jpeg')
     name: str
     salary: dict
+    salary_range: dict = Field(alias="salary")
+    schedule: str = Field(alias="employment")
 
-    @validator('salary')
-    def good_salary(cls, v):
-        ans = v['to']
-        return ans
-
-    salary_range: dict = Field(alias='salary')
-
-    @validator('salary_range')
-    def from_salary_to(cls, v):
-        v.pop('currency')
-        v.pop('gross')
+    @validator("address")
+    def address_value(cls, v):
+        v = v["value"]
         return v
 
-    schedule: str = Field(alias='employment')
+    @validator("coordinates")
+    def coordinate(cls, v):
+        d = {
+            "latitude": v["lat"],
+            "longitud": v["lng"]
+        }
+        return d
 
-    @validator('schedule')
+    @validator("salary")
+    def good_salary(cls, v):
+        ans = v["to"]
+        return ans
+
+    @validator("salary_range")
+    def from_salary_to(cls, v):
+        v.pop("currency")
+        v.pop("gross")
+        return v
+
+    @validator("schedule")
     def schedule_employ(cls, v):
-        d = {'id': v}
+        d = {"id": v}
         return d
 
 
 try:
     resume = Resume.parse_raw(data)
 except ValidationError as e:
-    print('Exception', e.json())
+    print("Exception", e.json())
 else:
-    print(resume.json())
+    print(resume.dict())
