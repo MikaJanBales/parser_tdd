@@ -15,9 +15,9 @@ def test_correct_resume():
     list_keys = ['address', 'allow_messages', 'billing_type', 'business_area',
                  'contacts', 'coordinates', 'description', 'experience', 'html_tags',
                  'image_url', 'name', 'salary', 'salary_range', 'schedule']
-    k = 0
-    for i in resume.dict():
-        if i not in list_keys:
-            k += 1
+    acc = 0
+    for keys in resume.dict():
+        if keys not in list_keys:
+            acc += 1
             break
-    assert k == 0
+    assert acc == 0
