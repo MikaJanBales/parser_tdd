@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ValidationError, HttpUrl, EmailStr, Field, validator, root_validator
+from pydantic import BaseModel, ValidationError, HttpUrl, EmailStr, Field, validator
 
 data = '''
 { 
